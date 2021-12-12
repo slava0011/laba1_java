@@ -64,5 +64,19 @@ public class Main {
             breakfast[count_breakfast].consume();
             count_breakfast += 1;
         }
+
+        if (sort_flag) {
+            Arrays.sort(breakfast, new Comparator() {
+                public int compare(Object f1, Object f2) {
+                    if (f1 == null) return 1;
+                    if (f2 == null) return -1;
+                    if (((Food) f1).calculateCalories() == ((Food) f2).calculateCalories()) return 0;
+                    if (((Food) f1).calculateCalories() > ((Food) f2).calculateCalories()) return -1;
+                    return 1;
+                }
+            });
+        }
+
+
     }
 }
