@@ -95,6 +95,36 @@ public class Main {
             System.out.println("Общая калорийность завтрака: " + calories + " Кл");
         }
 
-        
+        Food[] breakfast_diff = new Food[20];
+        System.arraycopy(breakfast, 0, breakfast_diff, 0, 20);
+        Arrays.sort(breakfast_diff, new Comparator() {
+            public int compare(Object f1, Object f2) {
+                if (f1 == null) return 1;
+                if (f2 == null) return -1;
+                if (((Food) f1).calculateCalories() == ((Food) f2).calculateCalories()) return 0;
+                if (((Food) f1).calculateCalories() > ((Food) f2).calculateCalories()) return -1;
+                return 1;
+            }
+        });
+        int n = 1;
+        for (int i = 1; i < breakfast_diff.length; i++) {
+            if (breakfast_diff[i] != breakfast_diff[i-1]) n++;
+        }
+        Food[] food = new Food[20];
+        food[0] = breakfast_diff[0];
+        n = 1;
+        for (int i = 1; i < breakfast_diff.length; i++) {
+            if (breakfast_diff[i]!=null && !breakfast_diff[i].equals(breakfast_diff[i-1])) food[n++] = breakfast_diff[i];
+        }
+
+        System.out.println("\nСколько чего съедено:");
+        for(int i = 0; i < food.length; i++){
+            if(food[i] == null) break;
+            int count = 0;
+            for(int j = 0; j < breakfast_diff.length; j++){
+                if(food[i].equals(breakfast_diff[j])) count++;
+            }
+            System.out.println(food[i] + ": " + count);
+        }
     }
 }
