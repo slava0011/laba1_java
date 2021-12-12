@@ -77,6 +77,24 @@ public class Main {
             });
         }
 
+        for (Food dish : breakfast) {
+            if (dish != null) {
+                dish.consume();
+            } else {
+                break;
+            }
+        }
 
+        if (calories_flag) {
+            int calories = 0;
+            for (Food dish : breakfast) {
+                if (dish != null) {
+                    calories += dish.calculateCalories();
+                }
+            }
+            System.out.println("Общая калорийность завтрака: " + calories + " Кл");
+        }
+
+        
     }
 }
